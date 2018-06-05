@@ -107,7 +107,7 @@ Tammy Everts의 글에 따르면, 페이지에 이미지를 추가하거나 기�
 <figcaption>2016년 [Soasta/Google 연구](https://www.thinkwithgoogle.com/marketing-resources/experience-design/mobile-page-speed-load-time/)에 따르면, 전환율에서 이미지가 2번째로 중요한 역할을 합니다. 또한, 이미지 수가 기존 대비 38% 정도 줄은 페이지에서 가장 전환율이 높았습니다.</figcaption>
 </figure>
 
-이미지 최적화 작업은 파일 크기를 줄이는 기법을 여러 개 같이 사용하여 행합니다. 결국, 여러분 서비스에 필요한 이미지 정확도에 따라 최적화 작업 방법이 달라집니다.
+이미지 최적화 작업은 파일 크기를 줄이는 기법을 여러 개 같이 사용하여 행합니다. 결국, 여러분 서비스에 필요한 이미지의 해상도에 따라 최적화 작업 방법이 달라집니다.
 
 <figure>
 <picture>
@@ -2199,9 +2199,9 @@ Lazysizes만이 유일한 선택지는 아닙니다. 아래 목록에 몇 가지
 
 ## <a id="display-none-trap" href="#display-none-trap"><code>display: none;</code> 함정 피하기</a>
 
-Older responsive image solutions have mistaken how browsers handle image requests when setting the CSS  `display` property. This can cause significantly more images to be requested than you might be expecting and is another reason `<picture>` and `<img srcset>` are preferred for loading responsive images.
+여태까지의 반응형 이미지 사용 방식은 CSS의 `display` 속성을 사용하면 브라우저가 이미지 요청을 어떻게 다루는지에 대한 이해가 부족했습니다. 때문에 이미지 요청이 예상했던 것보다 훨씬 더 많이 발생할 가능성을 높였으며, 이 때문에 반응형 이미지 로딩용으로 `<picture>`나 `<img srcset>`에 대한 선호되고 있는 추세입니다.
 
-Have you ever written a media query that sets an image to `display:none` at certain breakpoints?
+특정 미디어 쿼리 중단점(breakpoint)에서 이미지가 `display:none` 처리 되도록 하는 코드를 작성해 보신 적이 있나요?
 
 ```html
 <img src="img.jpg">
@@ -2214,7 +2214,7 @@ Have you ever written a media query that sets an image to `display:none` at cert
 </style>
 ```
 
-Or toggled what images are hidden using a `display:none` class?
+아니면 `display:none` 클래스를 사용해 이미지 노출을 제어해 본 적은요?
 
 ```html
 <style>
@@ -2226,7 +2226,7 @@ Or toggled what images are hidden using a `display:none` class?
 <img src=“img-hidden.jpg" class="hidden">
 ```
 
-A quick check against the Chrome DevTools network panel will verify that images hidden using these approaches still get fetched, even when we expect them not to be. This behavior is actually correct per the embedded resources spec.
+구글 크롬 개발자도구의 네트워크 패널에서 간단하게 검사를 해보면, 위의 방식으로 숨긴 이미지가 여전히 페칭(fetching)되고 있음을 확인해 볼 수 있습니다. 심지어 가져오지 않을 것이라 예상했던 이미지 까지도요. 브라우저의 이런 행동방식은 사실 임베디드 리소스 명세에 맞게 제대로 구현된 것입니다.
 
 <figure>
 <picture>
