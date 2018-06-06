@@ -56,7 +56,7 @@
         </li>
         <li><a href="#svg-optimization">SVG 최적화</a></li>
         <li><a href="#avoid-recompressing-images-lossy-codecs">손실 코덱으로 이미지를 재압축하지 마세요</a></li>
-        <li><a href="#reduce-unnecessary-image-decode-costs">디코딩과 크기변환 불필요하게 하지 말기</a>
+        <li><a href="#reduce-unnecessary-image-decode-costs">불필요한 디코딩 및 크기변환 하지 않기</a>
                 <ul>
                         <li><a href="#delivering-hidpi-with-srcset"><code>srcset</code>으로 HiDPI 이미지 전달하기</a></li>
                         <li><a href="#art-direction">아트 디렉션</a></li>
@@ -66,9 +66,9 @@
         <li><a href="#image-sprites">이미지 스프라이트 기법</a></li>
         <li><a href="#lazy-load-non-critical-images">중요하지 않은 이미지는 레이지 로딩</a></li>
         <li><a href="#display-none-trap"><code>display: none;</code> 함정 피하기</a></li>
-        <li><a href="#image-processing-cdns">지금 상황에서 이미지 처리 CDN을 사용해도 될까요?</a></li>
+        <li><a href="#image-processing-cdns">이미지 처리 CDN을 사용해도 될까요?</a></li>
         <li><a href="#caching-image-assets">이미지 에셋 캐싱하기</a></li>
-        <li><a href="#preload-critical-image-assets">중요한 이미지 에셋은 프리로딩(preloading)하기</a></li>
+        <li><a href="#preload-critical-image-assets">중요한 이미지는 프리로딩(preloading)</a></li>
         <li><a href="#performance-budgets">이미지 성능 예산 짜기</a></li>
         <li><a href="#closing-recommendations">글을 마치며 추천 사항 몇 가지</a></li>
         <li><a href="#trivia">트리비아</a></li>
@@ -641,9 +641,9 @@ gulp.task('images', function () {
 
 ### <a id="how-far-have-we-come-from-the-jpeg" href="#how-far-have-we-come-from-the-jpeg">기존의 JPEG에서 얼마나 발전한 상태인가요?</a>
 
-**이 장에서는 웹 이미지 포맷의 현재 지형에 대해 알아봅니다.**
+**이 장에서는 웹 이미지 포맷의 현재 발전 상황에 대해 알아봅니다.**
 
-*간단 요약 - 너무 파편화되어 있습니다. 최신 포맷을 사용하게 된다면 브라우저마다 포맷 대응을 따로따로 해야 할 필요가 자주 있게 될 겁니다.*
+*간단 요약 - 너무 파편화되어 있습니다. 최신 포맷을 채택한다면 브라우저마다 포맷 대응을 따로따로 해야하는 경우가 자주 발생합니다.*
 
 <figure>
 <picture>
@@ -928,9 +928,9 @@ Guetzli 프로젝트에 참여한 어떤 분의 [코멘트](https://github.com/g
 
 ## <a id="what-is-webp" href="#what-is-webp">WebP가 뭔가요?</a>
 
-[WebP](https://developers.google.com/speed/webp/)는 Google의 최신 이미지 포맷입니다. 품질은 일정 수치 이상으로 유지하면서, 손실/비손실 두 모드에서 모두 파일 크기를 조금 더 줄여보는 것을 목표로 합니다. 알파 채널 투명도와 애니메이션을 둘 다 지원합니다.
+[WebP](https://developers.google.com/speed/webp/)는 Google에서 만든 최신 이미지 포맷입니다. 품질은 일정 수치 이상으로 유지하면서, 손실/비손실 모드에서 모두 조금이라도 더 파일 크기를 줄여보는 것을 목표로 합니다. 알파 채널 투명도와 애니메이션을 둘 다 지원합니다.
 
-작년에 WebP는 손실 및 무손실 압축 모드에서 성능이 10% 이상 향상되었고, 속도 측면에서는 두 배 이상 빨라져서 압축 성능 역시 10%가량 향상되었습니다. WebP는 모든 상황에서 사용할 만한 툴은 아니지만, 이미지 압축 커뮤니티 안에서는 단단한 사용자층을 보유하고 있습니다. 사용자 수 역시 증가 중입니다. 그 이유를 알아보도록 하겠습니다.
+작년에 WebP는 손실 및 무손실 압축 모드 성능이 둘 다 몇 퍼센트 가량 향상되었고, 속도는 두 배 이상 빨라져서 압축 해제 성능 역시 10% 정도 향상되었습니다. WebP는 모든 상황에서 사용할 만한 툴은 아니지만, 이미지 압축 커뮤니티 내에서는 단단한 지지기반과 계속해서 늘어나는 사용자수를 보유중입니다. 그 이유를 알아보도록 하겠습니다.
 
 <figure>
 <picture>
@@ -1651,9 +1651,9 @@ Sara Soueidan의 '[웹용 SVG 최적화 팁](https://calendar.perfplanet.com/201
 
 압축은 되도록 항상 원본 이미지를 가지고 하세요. 이미 압축된 이미지를 다시 압축한다면 안 좋은 결과를 보게 됩니다. 이미 60 품질로 압축된 JPEG 이미지가 있다고 해봅시다. 이 이미지를 손실 인코딩으로 다시 압축한다면 60일 때보다 보기 안좋게 될 것입니다. 추가로 압축을 한 번 더 할 때마다 데이터 손실이 일어나게 됩니다. 데이터를 잃어버리게 되고 압축으로 인한 아티팩트가 단계마다 증가하게 됩니다. 심지어 고품질로 설정을 한 후 압축을 해도 안 좋기는 마찬가지입니다.
 
-이런 일이 일어나지 않게 하려면, **처음 압축 할 때부터 허용할 수 있는 범위 내에서 제일 낮은 품질 수치를 선택하세요.** 처음부터 파일 용량을 최대로 절약할 수 있습니다. 여기서 더 품질을 저하해서 파일 크기를 줄여본다면 그 즉시 좋지 않아 보이기 때문에 반복된 압축을 피할 수 있습니다.
+이런 상황을 미연에 방지 하려면, **처음 압축 할 때부터 허용 범위 내의 품질 중 가장 낮은 수치를 선택하세요.** 처음부터 파일 용량을 최대로 줄일 수 있습니다. 여기서 품질을 더 떨어트려서 파일 크기를 줄인다면, 그때부터 즉시 결과물이 좋지 않아 보이기 때문에 계속해서 압축하는 일을 피할 수 있습니다.
 
-손실 압축된 파일을 다시 인코딩하면 거의 언제나 파일 용량은 최대로 줄어들게 되나, 그렇다고 해서 여러분이 생각했던 것만큼 품질이 괜찮게 나오지는 않습니다.
+손실 압축된 파일을 다시 인코딩하면 거의 항상 파일 용량은 최대로 줄어들게 되나, 그렇다고 한들 여러분이 생각했던 것만큼 품질이 괜찮게 나오지는 않습니다.
 
 <figure>
 <picture>
@@ -1676,14 +1676,14 @@ Sara Soueidan의 '[웹용 SVG 최적화 팁](https://calendar.perfplanet.com/201
   <img src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1502426282/essential-image-optimization/generational-loss.jpg"/>
 </noscript>
 </picture>
-<figcaption>상단 이미지는 Jon Snevers가 만든 [훌륭한 영상](https://www.youtube.com/watch?v=w7vXJbLhTyI)과 그 [연관 아티클](http://cloudinary.com/blog/why_jpeg_is_like_a_photocopier)에서 따온 것인데, 재압축 할수록 입게 되는 품질 손실의 영향을 이미지 포맷별로 볼 수 있습니다. 여러분이 만약 SNS에서 (이미 압축이 된) 이미지를 내려받아서 다시 올린다면 (이때 재압축이 발생합니다) 발생하게 되는 문제점일 것입니다. 이미지 품질이 점점 악화합니다.</figcaption>
+<figcaption>상단 이미지는 Jon Snevers가 만든 [훌륭한 영상](https://www.youtube.com/watch?v=w7vXJbLhTyI)과 [관련 글](http://cloudinary.com/blog/why_jpeg_is_like_a_photocopier)에서 따온 것인데, 압축을 계속 할수록 이미지에 발생하는 품질 손실을 포맷별로 보여주고 있습니다. 여러분이 만약 SNS에서 (이미 압축이 된) 이미지를 내려받은 후 이를 다시 웹상에 올린다면 (이때 압축이 다시 됩니다) 발생할 문제점들을 보여줍니다. 이미지 품질이 점점 악화됩니다.</figcaption>
 </figure>
 
-trellis 양자화(quantization) 덕분에 MozJPEG은 재압축으로 인한 품질 손상 영향을 덜 받습니다. (아마 우연적인 결과 같습니다) 모든 DCT 값을 정확하게 압축하는 대신, +1/-1 범위 내에서 조금 더 가까이 있는 값을 조사하여 몇 비트라도 조금 더 압축할 수 있는 값을 찾아봅니다. 손실 FLIF는 (재)압축 전에는 손실 PNG와 매우 비슷합니다. 데이터를 살펴본 후에 어떤 것을 버릴지 결정 내립니다. 재압축된 PNG는 데이터가 더 바뀌는 것을 방지하기 위해 이를 감지하는 ‘구멍’들을 가지고 있습니다.
+trellis 양자화(quantization) 덕분에 MozJPEG을 사용하면 압축을 다시 해도 품질 손상 영향을 덜 주게 됩니다. (아마 우연적인 결과 같습니다) 이 양자화 기법에서는 모든 DCT 값을 정확하게 압축하는 대신, +1/-1 범위 내의 값 중에서 단 몇 비트라도 더 압축할 수 있는 값을 찾아냅니다. 손실 FLIF는 (재)압축 전에는 손실 PNG와 매우 비슷합니다. 이미지 데이터를 살펴본 후, 어떤 것을 버릴지 결정 내립니다. 재압축된 PNG는 데이터가 더 변경되는 것을 방지하기 위해 이를 감지하는 ‘구멍’들을 가지고 있습니다.
 
-**원본 파일을 편집할 때는, PNG와 TIFF같은 무손실 포맷으로 저장해서 할 수 있는 한 최상의 품질로 보관하세요.** 그러면 여러분이 사용하는 빌드 툴이나 이미지 압축 서비스를 이용해 얻은 결과물을 사용자들에게 보여주더라도 품질 손실을 최소로 할 수 있습니다.
+**원본 파일을 편집할 때는, PNG와 TIFF같은 무손실 포맷으로 저장해서 할 수 있는 한 최상의 품질로 보관하세요.** 그러면 여러분이 사용하는 빌드 툴이나 이미지 압축 서비스를 거쳐 나온 결과물을 사용자들에게 보여주더라도 품질 손실을 최소화 할 수 있습니다.
 
-## <a id="reduce-unnecessary-image-decode-costs" href="#reduce-unnecessary-image-decode-costs">디코딩과 크기변환 불필요하게 하지 말기</a>
+## <a id="reduce-unnecessary-image-decode-costs" href="#reduce-unnecessary-image-decode-costs">불필요한 디코딩 및 크기변환 하지 않기</a>
 
 지금까지는 사용자들이 필요한 것 이상으로 크기가 크고 해상도 높은 이미지를 제공하였습니다. 이로 인해 치러야 할 비용이 있습니다. 이미지 디코딩과 크기 변환은 보통 모바일 하드웨어 상에서 브라우저가 수행하는 작업 중에 비용이 높은 작업에 속합니다. 큰 이미지를 서버에서 내려보내서 CSS나 width/height 속성으로 크기를 변환하면, 다음 그림과 같은 일이 벌어지는 것을 보게 될 것이고, 이로 인해 성능에 영향을 주게 됩니다.
 
@@ -2001,7 +2001,7 @@ trellis 양자화(quantization) 덕분에 MozJPEG은 재압축으로 인한 품�
 
 ## <a id="image-sprites" href="#image-sprites">이미지 스프라이트 기법</a>
 
-웹 역사상 오랫동안 함께해 온 [이미지 스프라이트](https://developers.google.com/web/fundamentals/design-and-ui/responsive/images#use_image_sprites) 기법(때로는 CSS 스프라이트라고도 불립니다)은 모든 브라우저에서 사용할 수 있습니다. 잘라놓은 이미지들을 하나의 큰 판으로 합쳐서 페이지 로딩 시 이미지 요청 수를 줄이는 용도로 널리 사용되고 있습니다.
+웹이 만들어진 이후 오랫동안 사용되어 온 [이미지 스프라이트](https://developers.google.com/web/fundamentals/design-and-ui/responsive/images#use_image_sprites) 기법(때로는 CSS 스프라이트라고도 불립니다)은 모든 브라우저에서 사용할 수 있습니다. 잘라놓은 이미지들을 하나의 큰 판으로 합쳐서 페이지 로딩 시 이미지 요청 수를 줄이는 용도로 널리 사용되고 있습니다.
 
 <figure>
 <picture>
@@ -2226,7 +2226,7 @@ Lazysizes만이 유일한 선택지는 아닙니다. 아래 목록에 몇 가지
 <img src=“img-hidden.jpg" class="hidden">
 ```
 
-구글 크롬 개발자도구의 네트워크 패널에서 간단하게 검사를 해보면, 위의 방식으로 숨긴 이미지가 여전히 페칭(fetching)되고 있음을 확인해 볼 수 있습니다. 심지어 가져오지 않을 것이라 예상했던 이미지 까지도요. 브라우저의 이런 행동방식은 사실 임베디드 리소스 명세에 맞게 제대로 구현된 것입니다.
+구글 크롬 개발자도구의 네트워크 패널에서 간단하게 검사를 해보면, 위의 방식으로 숨긴 이미지가 여전히 페칭(fetching)되고 있음을 확인해 볼 수 있습니다. 심지어 가져오리라 생각하지 못했던 이미지 까지도요. 브라우저의 이런 행동방식은 사실 임베디드 리소스 명세에 맞게 제대로 구현된 것입니다.
 
 <figure>
 <picture>
@@ -2251,15 +2251,15 @@ Lazysizes만이 유일한 선택지는 아닙니다. 아래 목록에 몇 가지
 </picture>
 </figure>
 
-**Does `display:none` avoid triggering a request for an image `src`?**
+**`display:none` 때문에 이미지 `src` 요청은 안 일어나지 않나요?**
 
 ```html
 <div style="display:none"><img src="img.jpg"></div>
 ```
 
-No. The image specified will still get requested. A library cannot rely on display:none here as the image will be requested before JavaScript can alter the src.
+아닙니다. `src` 속성값으로 들어가는 이미지 요청은 여전히 발생하게 됩니다. 자바스크립트가 소스 이미지를 바꿔 버리기 전에 이미지 요청이 일어나기 때문에, `display:none`에 의존하여 라이브러리를 사용하거나 만들 수는 없습니다.
 
-**Does `display:none` avoid triggering a request for a `background: url()`?**
+**`display:none`를 사용하면 `background: url()` 요청 발생은 피할 수 있지 않나요?**
 
 ```html
 <div style="display:none">
@@ -2267,42 +2267,41 @@ No. The image specified will still get requested. A library cannot rely on displ
 </div>
 ```
 
-Yes. CSS backgrounds aren’t fetched as soon as an element is parsed. Calculating CSS styles for children of elements with `display:none` would be less useful as they don’t impact rendering of the document. Background images on child elements are not calculated nor downloaded.
+네. 요소 파싱(parsing) 작업이 끝나자마자 CSS 배경을 가져오는 작업이 일어나지는 않습니다. `display:none`이 적용된 자식 요소들에 대한 CSS 스타일을 계산하는 일은 해봤자 문서 렌더링에 영향이 없기 때문에 그다지 쓸모가 없는 작업입니다. 그래서 그런 자식 요소들의 배경 이미지애 대한 다운로드 또는 계산 작업 역시 진행되지 않습니다.
 
-Jake Archibald’s [Request Quest](https://jakearchibald.github.io/request-quest/) has an excellent quiz on the pitfalls of using `display:none` for your responsive images loading. When in doubt about how specific browser’s handle image request loading, pop open their DevTools and verify for yourself.
+제이크 아치볼드(Jake Archibald)가 만든 [리퀘스트 퀘스트(Request Quest, 요청 탐구)](https://jakearchibald.github.io/request-quest/)에 들어가 보시면, 반응형 이미지 로딩에서 `display: none`을 사용할 때 빠지기 쉬운 함정에 대한 근사한 퀴즈를 풀어보실 수 있습니다. 특정 브라우저가 이미지 요청 로딩을 어떻게 처리하는지 의문이 생기신다면, 그 브라우저의 개발자 도구를 열어 직접 확인해 보세요.
 
-Again, where possible, use `<picture>` and `<img srcset>` instead of relying on `display:none`.
+다시 말하지만, 가능하다면 `display:none`에 의존하기 보다는 `<pictrue>`와 `<img srcset>`을 사용해 주세요.
 
-## <a id="image-processing-cdns" href="#image-processing-cdns">지금 상황에서 이미지 처리 CDN을 사용해도 될까요?</a>
+## <a id="image-processing-cdns" href="#image-processing-cdns">이미지 처리 CDN을 사용해도 될까요?</a>
 
-*The time you’ll spend reading the blog posts to setup your own image processing pipeline and tweaking your config is often >> the fee for a service. With [Cloudinary](http://cloudinary.com/) offering a free service, [Imgix](https://www.imgix.com/) a free trial and [Thumbor](https://github.com/thumbor/thumbor) existing as an OSS alternative, there are plenty of options available to you for automation.*
+*대부분의 경우, 나만의 이미지 처리 파이프라인을 구축해 보겠다고 블로그 포스팅을 읽어보고 설정을 변경하는 데 들이는 시간을 돈으로 따져보면 CDN 서비스 이용료보다 훨씬 많은 비용이 들어갑니다. 이미지 처리 자동화에 사용할 만한 옵션이 충분히 존재하는데, 무료 서비스를 사용하고 싶다면 [Cloudinary](http://cloudinary.com/), 무료 시험판을 사용해 보고 싶다면 [Imgix](https://www.imgix.com/), 유료 서비스 대신 사용할 수 있는 오픈소스 소프트웨어(OSS)를 찾으신다면 [Thumbor](https://github.com/thumbor/thumbor)가 있습니다.*
 
-To achieve optimal page load times, you need to optimize your image loading. This optimization calls for a responsive image strategy and can benefit from on-server image compression, auto-picking the best format and responsive resizing. What matters is that you deliver the correctly sized image to the proper device in the proper resolution as fast as possible. Doing this is not as easy as one might think.
+페이지 로딩 시간을 최적화 시키려면 이미지 로딩을 최적화 시켜야 합니다. 최적화를 제대로 하려면 반응형 이미지 사용 전략을 잘 짜야하며, 이를 통해 서버 쪽 이미지 압축, 이미지 최적 포맷 자동 선택 및 반응형 이미지 크기 자동 재조정을 할 수 있습니다. 중요한 것은 각각의 사용자 기기에 알맞게 적절한 크기의 이미지를 적절한 해상도로 할 수 있는 한 빨리 전달하는 것입니다. 혹자는 쉽다고 생각할 지도 모르나 그렇지 않습니다.
 
-**Using Your Server vs. a CDN**
+**서버 사용 vs. CDN 사용**
 
-Because of the complexity and ever-evolving nature of image manipulation, we’re going to offer a quote from someone with experience in the field, then proceed with a suggestion.
+이미지 조작 기술은 워낙 복잡하고 계속해서 신기술이 나오고 있는 환경이기 때문에, 실무 경험을 갖춘 어떤 분의 말을 먼저 인용한 후, 제안으로 넘어가 보겠습니다.
 
-"If your product is not image manipulation, then don’t do this yourself. Services like Cloudinary [or imgix, Ed.] do this much more efficiently and much better than you will, so use them. And if you’re worried about the cost, think about how much it’ll cost you in development and upkeep, as well as hosting, storage, and delivery costs." — [Chris Gmyr](https://medium.com/@cmgmyr/moving-from-self-hosted-image-service-to-cloudinary-bd7370317a0d)
+"담당하고 계신 제품이 이미지 조작 기술을 주로 하는 것이 아니라면, 직접 서버를 운용하실 생각은 하지 말아주세요. Cloudinary(혹은 imigix, Ed.)와 같은 서비스를 사용하시는 편이 여러분이 직접 하시는 것보다 훨씬 더 효율적이고 나은 결과를 가져다 줄 것이므로, 이런 서비스들을 사용하세요. 그리고 만약 서비스 사용 비용 걱정이 든다면, 여러분이 직접 이를 개발하고 유지보수하는 데 쓰일 비용, 호스팅, 저장, 그리고 전송 비용까지 전부 합쳐 얼마나 들지 한번 생각해 보세요." - [Chris Gmyr](https://medium.com/@cmgmyr/moving-from-self-hosted-image-service-to-cloudinary-bd7370317a0d)
 
+현재로써는 위 인용구에 대해 동의를 표하는 바이며, 여러분도 이미지 처리하실 때 CDN 사용을 고려해 보시기를 추천합니다. CDN 서비스 두개를 가지고 앞에서 얘기한 작업들을 처리할 때 어떤 점이 다를지 비교 분석 해보도록 하겠습니다.
 
-For the moment, we are going to agree and suggest that you consider using a CDN for your image processing needs. Two CDNs will be examined to see how they compare relative to the list of tasks we raised earlier.
+**Cloudinary와 imgix**
 
-**Cloudinary and imgix**
+[Cloudinary](http://cloudinary.com/)와 [imgix](https://www.imgix.com/) 둘 다 저명한 이미지 처리 CDN 입니다. 전세계 수십만명이 넘는 개발자들과 넷플릭스와 레드불을 포함한 회사들이 채택한 CDN입니다. 좀 더 자세히 알아보도록 하겠습니다.
 
-[Cloudinary](http://cloudinary.com/) and [imgix](https://www.imgix.com/) are two established image processing CDNs. They are the choice of hundreds of thousands of developers and companies worldwide, including Netflix and Red Bull. Let’s look at them in more detail.
+**가장 먼저 알아두어야 할 것은 뭔가요?**
 
-**What are the Basics?**
+여러분이 CDN 서비스처럼 네트워크 서버의 주인이 아닌 이상, 직접 서버를 운용하는 것보다 이들 CDN 서비스를 사용함으로써 얻을 수 있는 가장 큰 이점은 바로 이들이 운용하는 전세계에 분산된 네트워크 시스템을 이용하여 사용자마다 가장 근처에 위치한 서버에서 이미지 사본을 받아볼 수 있게 할 수 있다는 것입니다. 그리고 이미지 로딩 전략 트렌드가 바뀔 때마다 이에 대한 '미래 예측(future proof)'도 여러분보다 CDN 서비스에서 훨씬 더 쉽게 할 수 있습니다. 만약 이를 직접 하게된다면 유지보수도 하면서 신흥 포맷에 대한 브라우저 지원 여부 및 이미지 압축 커뮤니티 소식도 계속해서 따라잡아야 합니다.
 
-Unless you are the owner of a network of servers like they are, their first huge advantage over rolling your own solution is that they use a distributed global network system to bring a copy of your images closer to your users. It’s also far easier for a CDN to ‘future proof’ your image loading strategy as trends change – doing this on your own requires maintenance, tracking browser support for emerging formats & following the image compression community.
+두번째 장점은 각각의 서비스마다 가격 플랜이 단계별로 책정되어 있다는 것입니다. Cloudinary는 [무료](http://cloudinary.com/pricing) 플랜도 제공하며, imgix는 대용량 프리미엄 플랜에 부과하는 가격과 비교했을 때 비싸지 않은 가격으로 표준 플랜을 마련해 두었습니다. Imgix에서는 서비스에 대한 보증 차원에서, Cloudinary의 무료 플랜과 거의 동일한 급의 무료 [시험](https://www.imgix.com/pricing)판도 제공합니다.
 
-Second, each service has a tiered pricing plan, with Cloudinary offering a [free level](http://cloudinary.com/pricing) and imgix pricing their standard level inexpensively, relative to their high-volume premium plan. Imgix offers a free [trial](https://www.imgix.com/pricing) with a credit towards services, so it almost amounts to the same thing as a free level.
+세번째 장점은 두 서비스 모두 API를 통한 접근을 제공한다는 점입니다. 개발자들은 프로그램을 통해 CDN에 접속하여 이미지 처리 과정을 자동화시킬 수 있습니다. 클라이언트 라이브러리, 프레임워크 플러그인, API 문서 모두 제공합니다. 이 중 일부 기능은 높은 가격 플랜 사용자들에게만 제공됩니다.
 
-Third, API access is provided by both services. Developers can access the CDN programmatically and automate their processing. Client libraries, framework plugins, and API documentation are also available, with some features restricted to higher paid levels.
+**이미지 처리를 시작해 봅시다**
 
-**Let’s Get to the Image Processing**
-
-For now, let’s limit our discussion to static images. Both Cloudinary and Imgix offer a range of image manipulation methods, and both support primary functions such as compression, resizing, cropping and thumbnail creation in their standard and free plans.
+지금은 정적인 이미지만 다뤄보도록 하겠습니다. Cloudinary와 Imgix 둘 다 다양한 이미지 조작 기능을 제공하며, 표준 및 무료 플랜에서도 압축, 크기 조정, 자르기 및 썸네일 생성과 같은 중요 기능을 지원합니다.
 
 <figure>
 <picture>
@@ -2325,81 +2324,81 @@ For now, let’s limit our discussion to static images. Both Cloudinary and Imgi
   <img src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1502426282/essential-image-optimization/Modern-Image36.jpg"/>
 </noscript>
 </picture>
-<figcaption>Cloudinary Media Library: By default Cloudinary encodes [non-Progressive JPEGs](http://cloudinary.com/blog/progressive_jpegs_and_green_martians). To opt-in to generating them, check the ‘Progressive’ option in ‘More options’ or pass the ‘fl_progressive’ flag.</figcaption>
+<figcaption>Cloudinary 미디어 라이브러리: Cloudinary는 기본 옵션으로 [비-점진적 JPEG 이미지](http://cloudinary.com/blog/progressive_jpegs_and_green_martians) 인코딩을 제공합니다. 이들 이미지 생성을 하려면 '옵션 더보기'에서 '점진적'을 체크하거나 'fl_progressive' 플래그를 전달해 주세요.</figcaption>
 </figure>
 
-Cloudinary lists [seven broad image transformation](http://cloudinary.com/documentation/image_transformations) categories, with a total of 48 subcategories within them. Imgix advertises over [100 image processing operations](https://docs.imgix.com/apis/url?_ga=2.52377449.1538976134.1501179780-2118608066.1501179780).
+Cloudinary에서는 [이미지 변형 카테고리를 7가지 대분류로](http://cloudinary.com/documentation/image_transformations), 총 48가지의 하위 범주로 제공합니다. Imgix에서는 [100가지 이상의 이미지 처리 작업을 제공한다고](https://docs.imgix.com/apis/url?_ga=2.52377449.1538976134.1501179780-2118608066.1501179780) 선전하고 있습니다.
 
-**What Happens by Default?**
+**기본 제공 사항은 뭔가요?**
 
-*   Cloudinary performs the following optimizations by default:
-*   [Encodes JPEGs using MozJPEG](https://twitter.com/etportis/status/891529495336722432) (opted against Guetzli as a default)
-*   Strips all associated metadata from the transformed image file (the original image is left untouched). To override this behavior and deliver a transformed image with its metadata intact, add the keep_iptc flag.
-*   Can generate WebP, GIF, JPEG, and JPEG-XR formats with automatic quality. To override the default adjustments, set the quality parameter in your transformation.
-*   Runs [optimization](http://cloudinary.com/documentation/image_optimization#default_optimizations) algorithms to minimize the file size with minimal impact to visual quality when generating images in the PNG, JPEG or GIF format.
+*   Cloudinary에서는 다음과 같은 최적화 작업을 기본으로 제공합니다.
+*   [MozJPEG을 사용한 JPEG 이미지 인코딩](https://twitter.com/etportis/status/891529495336722432) (Guetzli 대신 기본 옵션으로 선택됨)
+*   변형 후의 이미지 파일에서 모든 관련 메타데이터 제거(원본 파일은 건드리지 않음). 이렇게 말고 메타데이터를 건드리지 않은 채 이미지를 변형시키고 싶다면 keep_iptc 플래그를 추가해 주세요.
+*   WebP, GIF, JPEG, JPEG-XR 포맷 자동 품질로 생성 가능. 기본 품질 조정을 덮어 쓰고 싶다면 품질 파라미터를 조정해 주세요.
+*   PNG, JPEG, GIF 포맷 이미지 생성시 이미지 시각 품질에는 영향을 최소한으로 주면서 파일 사이즈를 최대한 줄일 수 있도록 [최적화](http://cloudinary.com/documentation/image_optimization#default_optimizations) 알고리즘 실행.
 
-Imgix has no default optimizations such as Cloudinary has. It does have a settable default image quality. For imgix, auto parameters help you automate your baseline optimization level across your image catalog.
+Imgix는 Cloudinary처럼 기본적으로 제공하는 최적화 기능이 없습니다. 대신 기본 이미지 품질 설정을 변경할 수 있습니다. Imgix를 사용하신다면 자동 파라미터 기능을 사용해 여러분의 이미지 카탈로그 기준 최적화 레벨을 자동으로 설정할 수 있습니다.
 
-Currently, it has [four different methods](https://docs.imgix.com/apis/url/auto):
+현재, 자동 파라미터 설정 방법은 [네가지](https://docs.imgix.com/apis/url/auto)가 있습니다.
 
-*   Compression
-*   Visual enhancement
-*   File format conversion
-*   Redeye removal
+*   압축
+*   시각적 향상
+*   파일 포맷 변환
+*   적목현상 제거
 
-Imgix supports the following image formats: JPEG, JPEG2000, PNG, GIF, Animated GIF, TIFF, BMP, ICNS, ICO, PDF, PCT, PSD, AI
+Imgix에서는 JPEG, JPEG2000, PNG, GIF, Animated GIF, TIFF, BMP, ICNS, ICO, PDF, PCT, PSD, AI 포맷을 지원합니다.
 
-Cloudinary supports the following image formats: JPEG, JPEG 2000, JPEG XR, PNG, GIF, Animated GIF, WebP, Animated WebP,BMPs, TIFF, ICOs, PDF, EPS, PSD, SVG, AI, DjVu, FLIF, TARGA.
+Cloudinary는 JPEG, JPEG 2000, JPEG XR, PNG, GIF, Animated GIF, WebP, Animated WebP,BMPs, TIFF, ICOs, PDF, EPS, PSD, SVG, AI, DjVu, FLIF, TARGA 포맷을 지원합니다.
 
-**What About Performance?**
+**성능은 어떤가요?**
 
-CDN delivery performance is mostly about [latency](https://docs.google.com/a/chromium.org/viewer?a=v&pid=sites&srcid=Y2hyb21pdW0ub3JnfGRldnxneDoxMzcyOWI1N2I4YzI3NzE2) and speed.
+CDN 전송 성능에 영향을 주는 것은 [지연(latency)](https://docs.google.com/a/chromium.org/viewer?a=v&pid=sites&srcid=Y2hyb21pdW0ub3JnfGRldnxneDoxMzcyOWI1N2I4YzI3NzE2)과 속도가 거의 전부입니다.
 
-Latency always increases somewhat for completely uncached images. But once an image is cached and distributed among the network servers, the fact that a global CDN can find the shortest hop to the user, added to the byte savings of a properly-processed image, almost always mitigates latency issues when compared to poorly processed images or solitary servers trying to reach across the planet.
+완전히 이미지가 캐싱되지 않으면 거의 항상 지연 시간이 늘어납니다. 그러나 이미지가 일단 한번 캐싱된 후에 네트워크 서버에 배포가 된다면, 글로벌 CDN에서는 사용자와 가장 가까운 전달 방법을 찾아낼 수 있으며, 적절하게 처리된 이미지 덕분에 전송량도 줄일 수 있습니다. 제대로 이미지 처리를 하지 않았을 때, 또는 오직 한대의 서버만 가지고 지구 전체를 커버하려고 할 때와 글로벌 CDN을 사용하는 경우를 비교해 보면, 후자의 경우 거의 대부분의 지연 문제를 완화시킬 수 있습니다.
 
-Both services use fast and wide CDN. This configuration reduces latency and increases download speed. Download speed affects page load time, and this is one of the most important metrics for both user experience and conversion.
+두 서비스 모두 속도도 빠르고 여기저기 널리 퍼져있는 CDN을 사용하고 있습니다. 이렇게 CDN을 설정해 둔 덕에 지연 속도는 줄어들면서 다운로드 속도는 증가하게 됩니다. 다운로드 속도는 페이지 로딩 시간에 영향을 주기도 하며, 그렇기 때문에 사용자 경험과 전환률을 측정해 볼 때 가장 중요한 단위 중 하나에 속합니다.
 
-**So How Do They Compare?**
+**그래서 둘을 비교해 보면요?**
 
-Cloudinary has [160K customers](http://cloudinary.com/customers) including Netflix, eBay and Dropbox. Imgix doesn’t report how many customers it has, but it is smaller than Cloudinary. Even so, imgix’s base includes heavyweight image users such as Kickstarter, Exposure, unsplash, and Eventbrite.  
+Cloudinary를 사용중인 고객수는 [16만명](http://cloudinary.com/customers) 정도이며, 넷플릭스, 이베이, 드롭박스도 여기에 속합니다. Imgix는 보유고객수를 공개하지 않았으나 Cloudinary 보다는 적습니다. 그렇다고는 해도, Kickstarter, Exposure, unsplash, Eventbrite와 같이 이미지를 평균 이상으로 많이 사용하는 회사들이 imgix를 사용하고 있습니다.
 
-There are so many uncontrolled variables in image manipulation that a head-to-head performance comparison between the two services is difficult. So much depends on how much you need to process the image — which takes a variable amount of time — and what size and resolution are required for the final output, which affects speed and download time. Cost may ultimately be the most important factor for you.
+이미지 조작 과정에는 제어할 수 없는 변수들이 아주 많이 포진해 있기 때문에, 두 서비스의 성능을 일대일로 정확하게 비교해 보는 것은 어렵습니다. 이미지 처리를 얼마나 해야 하는지(이에 따라 소요되는 시간이 상당히 달라집니다), 그리고 최종 출력물의 크기와 해상도(속도와 다운로드 시간에 영향을 주죠)에 따라 성능이 아주 크게 달라집니다. 아마 비용이 여러분에게 제일 중요한 최후의 요인이 될 것입니다.
 
-CDNs cost money. An image heavy site with a lot of traffic could cost hundreds of US dollars a month in CDN fees. There is a certain level of prerequisite knowledge and programming skill required to get the most out of these services. If you are not doing anything too fancy, you’re probably not going to have any trouble.
+CDN을 사용하려면 돈이 필요합니다. 이미지가 많이 올라가면서 트래픽이 많은 사이트는 한달 CDN 사용료만 해도 수백달러가 넘어가는 비용이 들어갈 겁니다. CDN 서비스를 최대한 잘 사용하려면 미리 관련 지식과 프로그래밍 스킬을 일정 수준 이상으로 닦아놓아야 합니다. 너무 오버스러운 기능만 사용하지 않으면 CDN을 사용하면서 곤경에 처할 일은 아마 전혀 없을 겁니다.
 
-But if you’re not comfortable working with image processing tools or APIs, then you are looking at a bit of a learning curve. In order to accommodate the CDN server locations, you will need to change some URLs in your local links. Do the right due diligence :)
+그러나 만약 이미지 처리 도구나 API를 사용하면서 어려움을 겪으신다면, 지금 내가 러닝 커브를 겪고 있구나 생각하시면 됩니다. CDN 서버를 제대로 사용하려면 여러분 로컬 링크 URL을 일부 바꿔야 할 수도 있습니다. 자산 관리 제대로 해두세요 :)
 
-**Conclusion**
+**결론**
 
-If you are currently serving your own images or planning to, perhaps you should give a CDN some consideration.
+만약 현재 스스로 이미지 서버를 구축해서 사용중이거나 그럴 계획이 있으시다면, CDN을 사용하면 어떨지 한번 고려해 볼 필요가 있습니다.
 
 ## <a id="caching-image-assets" href="#caching-image-assets">이미지 에셋 캐싱하기</a>
 
-Resources can specify a caching policy using [HTTP cache headers](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#cache-control). Specifically, `Cache-Control` can define who can cache responses and for how long
+[HTTP 캐시 헤더](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#cache-control)를 사용해 서비스 리소스에 대한 캐시 정책을 표기해 둘 수 있습니다. 구체적으로 말하자면, `Cache-Control`을 사용해 누가 응답을 캐시해 놓고 캐시 기간을 얼마나 될지 정의할 수 있습니다.
 
-Most of the images you deliver to users are static assets that will[ not change](http://kean.github.io/post/image-caching) in the future. The best caching strategy for such assets is aggressive caching.
+여러분이 유저에게 전달하는 이미지 대부분은 정적인 에셋이라서 그 내용이 앞으로도 [변하지 않는](http://kean.github.io/post/image-caching) 에셋입니다. 이런 유형의 에셋에 가장 적합한 캐시 전략은 '과감한(aggressive) 캐싱'입니다.
 
-When setting your HTTP caching headers, set Cache-Control with a max-age of a year (e.g. `Cache-Control:public; max-age=31536000`). This type of aggressive caching works well for most types of images, especially those that are long-lived like avatars and image headers.
+HTTP 캐싱 헤더를 설정할 때 `Cache-Control`의 `max-age`를 1년 내의 값 중 가장 최대로 줍니다. (예: `Cache-Control:public; max-age=31536000`) 이런식의 과감한 캐싱은 대부분의 이미지 유형에 적합하며, 특히 아바타나 이미지 헤더와 같이 오랫동안 사용할 이미지에 적당합니다.
 
-<aside class="note"><b>Note:</b> If you’re serving images using PHP, it can destroy caching due to the default [session_cache_limiter](http://php.net/manual/en/function.session-cache-limiter.php) setting. This can be a disaster for image caching and you may want to [work around](https://stackoverflow.com/a/3905468) this by setting session_cache_limiter('public') which will set public, max-age=. Disabling and setting custom cache-control headers is also fine.</aside>
+<aside class="note"><b>알아두기:</b> 만약 이미지를 전달하는 데 PHP를 사용중이라면, 기본 [session_cache_limiter](http://php.net/manual/en/function.session-cache-limiter.php) 설정 때문에 캐시가 삭제될 수도 있습니다. 이미지 캐싱에 있어서 이런 일은 재앙과도 같으므로, session_cache_limiter('public')로 세팅하면 이런 일을 [피할 수]((https://stackoverflow.com/a/3905468)) 있습니다. 이를 비활성화 시키고 커스텀 `Cache-Control`을 설정하는 것도 괜찮은 방법입니다.</aside>
 
-## <a id="preload-critical-image-assets" href="#preload-critical-image-assets">중요한 이미지 에셋은 프리로딩(preloading)하기</a>
+## <a id="preload-critical-image-assets" href="#preload-critical-image-assets">중요한 이미지는 프리로딩(preloading)</a>
 
-Critical image assets can be preloaded using [`<link rel=preload>`](https://www.w3.org/TR/preload/). 
+중요한 이미지 에셋들은 [`<link rel=preload>`](https://www.w3.org/TR/preload/)를 사용해 프리로딩할 수 있습니다.
 
-`<link rel=preload>` is a declarative fetch, allowing you to force the browser to make a request for a resource without blocking the document’s `onload` event. It enables increasing the priority of requests for resources that might otherwise not be discovered until later in the document parsing process. 
+`<link rel=preload>`은 선언적인(declarative) 자산 가져오기 방식이며, 브라우저가 `document`의 `onload` 이벤트로 인한 방해를 받지 않고 해당 리소스 요청을 할 수 있도록 강제할 수 있는 방법입니다. 이를 통해 문서 파싱 과정이 끝날때까지 존재감이 없었을 뻔한 리소스에 대한 요청 우선순위를 높일 수 있습니다.
 
-Images can be preloaded by specifying an `as` value of `image`:
+이미지는 `as` 속성값을 `image`로 명시하여 프리로딩할 수 있습니다.
 
 ```html
 <link rel="preload" as="image" href="logo.jpg"/>
 ```
 
-Image resources for `<img>`, `<picture>`, `srcset` and SVGs can all take advantage of this optimization.
+`<img>`, `<picture>`, `srcset`에 들어갈 이미지 리소스 및 SVG 파일 모두 이 최적화 방식을 적용할 수 있습니다.
 
-<aside class="note"><b>Note:</b> `<link rel="preload">` is [supported](http://caniuse.com/#search=preload) in Chrome and Blink-based browsers like Opera, [Safari Tech Preview](https://developer.apple.com/safari/technology-preview/release-notes/) and has been [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1222633) in Firefox.</aside>
+<aside class="note"><b>알아두기:</b> `<link rel="preload">`는 [Safari Tech Preview](https://developer.apple.com/safari/technology-preview/release-notes/), 크롬, 그리고 오페라와 같이 블링크 기반의 브라우저에서 [지원](http://caniuse.com/#search=preload)되며, 파이어폭스에서는 [구현이 진행중]((https://bugzilla.mozilla.org/show_bug.cgi?id=1222633))입니다.</aside>
 
-Sites like [Philips](https://www.usa.philips.com/), [Flipkart](https://www.flipkart.com/) and [Xerox](https://www.xerox.com/) use `<link rel=preload>` to preload their main logo assets (often used early in the document). [Kayak](https://kayak.com/) also uses preload to ensure the hero image for their header is loaded as soon as possible.
+[Philips](https://www.usa.philips.com/), [Flipkart](https://www.flipkart.com/), [Xerox](https://www.xerox.com/) 같은 사이트에서는 `<link rel=preload>`를 사용해 메인 로고 에셋(이들 이미지는 웹 페이지 앞쪽에서 자주 사용됩니다)을 미리 불러오고 있습니다. [Kayak](https://kayak.com/) 역시 헤더에 들어갈 히어로 이미지가 최대한 빠르게 로딩될 수 있도록 하기 위해 프리로드를 사용하고 있습니다.
 
 <figure>
 <picture>
@@ -2424,17 +2423,17 @@ Sites like [Philips](https://www.usa.philips.com/), [Flipkart](https://www.flipk
 </picture>
 </figure>
 
-**What is the Link preload header?** 
+**Link 프리로드 헤더가 뭐죠?** 
 
-A preload link can be specified using either an HTML tag or an [HTTP Link header](https://www.w3.org/wiki/LinkHeader). In either case, a preload link directs the browser to begin loading a resource into the memory cache, indicating that the page expects with high confidence to use the resource and doesn’t want to wait for the preload scanner or the parser to discover it.
+프리로드 링크는 HTML 태그로도 표기가 가능하고, [HTTP Link 헤더](https://www.w3.org/wiki/LinkHeader)로도 표기할 수 있습니다. 두 방법 모두 프리로드 링크가 브라우저가 특정 리소스를 로딩할 때 메모리 캐시에서 먼저 시작하도록 만듭니다. 프리로드 스캐너나 파서가 그 리소스를 발견할 때까지 기다릴 필요 없이 페이지에서 사용할 수 있다고 자신할 수 있음을 나타냅니다.
 
-A Link preload header for images would look similar to this:
+이미지 Link 프리로드 헤더는 다음과 비슷하게 생겼습니다.
 
 ```
 Link: <https://example.com/logo-hires.jpg>; rel=preload; as=image
 ```
 
-When the Financial Times introduced a Link preload header to their site, they shaved [1 second off](https://twitter.com/wheresrhys/status/843252599902167040) the time it took to display their masthead image:
+파이낸셜 타임스에서는 Link 프리로드 헤더를 사이트에 도입했더니, 발행인란 이미지 표시할 때 시간을 [1초 단축](https://twitter.com/wheresrhys/status/843252599902167040)시킬 수 있었다고 합니다.
 
 <figure>
 <picture>
@@ -2457,28 +2456,28 @@ When the Financial Times introduced a Link preload header to their site, they sh
   <img src="https://res.cloudinary.com/ddxwdqwkr/image/upload/v1504055773/essential-image-optimization/preload-financial-times.jpg"/>
 </noscript>
 </picture>
-<figcaption>Bottom: with `<link rel=preload>`, Top: without. Comparison for a Moto G4 over 3G on WebPageTest both [before](https://www.webpagetest.org/result/170319_Z2_GFR/) and [after](https://www.webpagetest.org/result/170319_R8_G4Q/).</figcaption>
+<figcaption>하단: `<link rel=preload>` 사용, 상단: 사용 안함. WebPageTest의 3G Moto G4 환경에서 테스트한 [적용 전](https://www.webpagetest.org/result/170319_Z2_GFR/)과 [적용 후](https://www.webpagetest.org/result/170319_R8_G4Q/).</figcaption>
 </figure>
 
-Similarly, Wikipedia improved time-to-logo performance with the Link preload header as covered in their [case study](https://phabricator.wikimedia.org/phame/post/view/19/improving_time-to-logo_performance_with_preload_links/).
+이와 유사하게 위키피디아에서도 그들의 [사례 연구](https://phabricator.wikimedia.org/phame/post/view/19/improving_time-to-logo_performance_with_preload_links/) 글에서 다루었듯이, Link 프리로드 헤더를 사용해 성능 개선을 이뤘다고 합니다.
 
-**What caveats should be considered when using this optimization?**
+**이 방법을 사용할 때 주의할 점은 무엇이 있나요?**
 
-Be very certain that it’s worth preloading image assets as, if they aren’t critical to your user experience, there may be other content on the page worth focusing your efforts on loading earlier instead. By prioritizing image requests, you may end up pushing other resources further down the queue.
+해당 이미지 에셋이 프리로딩 할 만한 가치가 정말 있는지 확신이 있어야 합니다. 이미지가 사용자 경험에 있어서 별로 중요한 것이 아닌 경우, 이 대신 여러분의 노력을 필요로 하는, 좀 더 빨리 불러올 만한 가치가 있는 다른 콘텐츠가 있을 겁니다. 이미지 요청에 대한 우선순위를 앞세우면, 다른 리소스에 대한 요청 우선순위가 큐의 저 아래로 밀려나게 됩니다.
 
-It’s important to avoid using `rel=preload` to preload image formats without broad browser support (e.g. WebP). It’s also good to avoid using it for responsive images defined in `srcset` where the retrieved source may vary based on device conditions. 
+브라우저 지원 범위가 넓지 않은 이미지 포맷(예: WebP)을 `rel=preload`를 사용해 프리로드 하면 안됩니다. 또한 `srcset`로 정의된 반응형 이미지를 사용하는 경우, 디바이스 조건에 따라 전달 소스가 달라지게 되므로 Link 프리로드 사용을 하지 않는 편이 좋습니다.
 
-To learn more about preloading, see [Preload, Prefetch and Priorities in Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf) and [Preload: What Is It Good For?](https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/).
+프리로딩에 대해 더 알아보고 싶다면, [크롬 브라우저에서의 프리로드, 프리패치, 그리고 우선순위에 관하여](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)와 [프리로드: 어디에 좋은 건가요?](https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/) 글을 읽어보세요.
 
 ## <a id="performance-budgets" href="#performance-budgets">이미지 성능 예산 짜기</a>
 
-A performance budget is a ‘budget’ for web page performance that a team attempts to not exceed. For example, ‘images will not exceed 200KB on any page’ or ‘the user experience must be usable in under 3 seconds’. When a budget isn’t being met, explore why this is and how you get back on target.
+성능 예산이란, 웹 페이지 성능에 대한 '예산'을 뜻하며 그 페이지를 담당하는 팀은 이 예산을 넘지 않도록 해야 합니다. 예를 들어, '어떤 페이지에서도 이미지 용량이 200KB를 넘으면 안된다'라거나 '사용자가 페이지를 접하여 사용하기 까지의 시간은 3초 이하여야만 한다' 등을 성능 예산으로 정해 둘 수 있습니다. 예산을 초과한다면, 원인을 찾아보고 목표 예산을 맞추려면 어떻게 해야 하는지에 대해서도 알아보세요.
 
-Budgets provide a useful framework for discussing performance with stakeholders. When a design or business decision may impact site performance, consult the budget. They’re a reference for pushing back or rethinking the change when it can harm a site’s user experience.
+사이트 이해 관계자들과 성능에 관해 논의할 때, 예산은 유용한 기준틀이 되어줄 수 있습니다. 디자인 혹은 비즈니스적인 결정으로 인해 사이트 성능에 영향이 갈 것 같으면, 예산을 측정해 보세요. 내려진 결정이 사이트 사용자 경험을 헤칠 것 같으면, 예산을 참고로 하여 결정을 유보시키거나 다시 한번 생각해 보도록 만들 수 있습니다.
 
-I’ve found teams have the best success with performance budgets when monitoring them is automated. Rather than manually inspecting network waterfalls for budget regressions, automation can flag when the budget is crossed. Two such services that are useful for performance budget tracking are [Calibre](https://calibreapp.com/docs/metrics/budgets) and [SpeedCurve](https://speedcurve.com/blog/tag/performance-budgets/).
+제가 관찰한 바로는, 성능 예산 모니터링을 자동화 시켜둔 경우에 팀 성과가 가장 좋았습니다. 예산이 어디서 틀어졌는지 알아보기 위해 네트워크 폭포수(waterfall)을 일일이 직접 확인하기 보다는, 이를 자동화 시켜 확인하면 예산 초과시 알림을 받아볼 수 있습니다. 성능 예산 추적에 유용한 서비스로는 [Calibre](https://calibreapp.com/docs/metrics/budgets)와 [SpeedCurve](https://speedcurve.com/blog/tag/performance-budgets/)가 있습니다.
 
-Once a performance budget for image sizes is defined, SpeedCurve starts monitoring and alerts you if the budget is exceeded:
+이미지 크기에 대한 성능 예산을 일단 정해 놓으면, SpeedCurve에서는 모니터링을 하기 시작해서 예산이 초과되었을 경우 여러분에게 알림을 보내줍니다.
 
 <figure>
 <picture>
@@ -2503,7 +2502,7 @@ Once a performance budget for image sizes is defined, SpeedCurve starts monitori
 </picture>
 </figure>
 
-Calibre offers a similar feature with support for setting budgets for each device-class you’re targeting. This is useful as your budget for image sizes on desktop over WiFi may vary heavily to your budgets on mobile.
+Calibre 역시 비슷한 기능을 제공하는데, 목표 디바이스 별 예산 설정 기능도 지원합니다. 모바일 성능 예산에 따라 데스크톱용부터 Wifi용 이미지 사이즈에 대한 예산이 크게 차이날 수 있기 때문에 유용하게 사용될 수 있는 기능입니다.
 
 <figure>
 <picture>
@@ -2530,34 +2529,35 @@ Calibre offers a similar feature with support for setting budgets for each devic
 
 ## <a id="closing-recommendations" href="#closing-recommendations">글을 마치며 추천 사항 몇 가지</a>
 
-Ultimately, choosing an image optimization strategy will come down to the types of images you’re serving down to your users and what you decide is a reasonable set of evaluation criteria. It might be using SSIM or Butteraugli or, if it’s a small enough set of images, going off of human perception for what makes the most sense.
+결국엔 이미지 최적화 전략 선택은 사용자에게 전달할 이미지 타입에 따라 결정됩니다. 그리고 여러분이 정해 놓은 기준이 바로 일련의 합리적인 평가 기준인 셈입니다. 평가 기준으로 SSIM이나 Butteraugli를 사용할 수도 있으며, 만약 작은 크기의 이미지만 사용중이라면, 무엇을 적합한 기준으로 삼을 지 사람의 눈으로 판별하기는 어려울 것입니다.
 
-**Here are my closing recommendations:**
+**마치면서, 제 추천 사항을 말하자면 다음과 같습니다.**
 
-If you **can’t** invest in conditionally serving formats based on browser support:
+브라우저에 따라 이미지 포맷을 조건적으로 사용자에게 제공할 수 **없는** 환경이라면 다음을 추천합니다. 
 
+* JPEG 품질 90 이상: Guetzli + MozJPEG의 jpegtran 조합을 추천합니다.
+    * 웹에서는 `q=90`은 쓸데없이 높은 품질입니다. `q=80`으로도 충분하며, 레티나 디스플레이에서조차 `q=50`를 사용할 수 있습니다. Guetzli에서는 그렇게 낮게 품질을 설정할 수 없으므로, 웹용으로 MozJPEG을 사용하시면 됩니다.
+    * Kornel Lesi&#x144;ski는 최근 광색역 디스플레이에서도 크롬 디스플레이의 자연색을 잘 보이게 하기 위해 소량의 sRGB 프로파일을 MozJPEG의 cjpeg 커맨드에 넣었습니다.
+* PNG pngquant + advpng 조합은 압축률이 꽤 좋습니다.
 
-* Guetzli + MozJPEG’s jpegtran are good optimizers for JPEG quality > 90.
-    * For the web `q=90` is wastefully high. You can get away with `q=80`, and on 2× displays even with `q=50`. Since Guetzli doesn’t go that low, for the web you can MozJPEG.
-    * Kornel Lesi&#x144;ski recently improved mozjpeg’s cjpeg command to add tiny sRGB profile to help Chrome display natural color on wide-gamut displays
-* PNG pngquant + advpng has a pretty good speed/compression ratio
-* If you **can** conditionally serve (using `<picture>`, the [Accept header](https://www.igvita.com/2013/05/01/deploying-webp-via-accept-content-negotiation/) or [Picturefill](https://scottjehl.github.io/picturefill/)):
-    * Serve WebP down to browsers that support it
-        * Create WebP images from original 100% quality images. Otherwise you’ll be giving browsers that do support it worse-looking images with JPEG distortions *and* WebP distortions! If you compress uncompressed source images using WebP it’ll have the less visible WebP distortions and can compress better too.
-        * The default settings the WebP team use of `-m 4 -q 75` are usually good for most cases where they optimize for speed/ratio.
-        * WebP also has a special mode for lossless (`-m 6 -q 100`) which can reduce a file to its smallest size by exploring all parameter combinations. It’s an order of magnitude slower but is worth it for static assets.
-    *   As a fallback, serve Guetzli/MozJPEG compressed sources to other browsers
+브라우저에 따라 조건적으로 이미지를 전달할 수 **있다면** 다음을 추천합니다. (`<picture>`, [Accept header](https://www.igvita.com/2013/05/01/deploying-webp-via-accept-content-negotiation/) 혹은 [Picturefill](https://scottjehl.github.io/picturefill/)을 사용하는 경우)
 
-Happy compressing!
+* WebP를 지원하는 브라우저에는 해당 포맷 파일을 전달합니다.
+  * 원본 품질 100% 이미지로 WebP 이미지를 만듭니다. 이렇게 하지 않으면 JPEG 왜곡*과* WebP 왜곡이 동시에 발생한 것 같은 이미지를 브라우저에게 주는 꼴이 되어버립니다! 만약 비압축 소스 이미지를 WebP로 압축한다면, 눈에는 잘 보이지 않는 WebP 왜곡이 발생하게 될 것이며 압축률 역시 더 나을 겁니다.
+  * 압축률 최적화를 하는 경우, WebP 팀이 사용하는 기본 설정인 `-m 4 -q 75`은 대부분의 경우에 잘 맞습니다.
+*  또한 WebP에는 모든 매개 변수 조합을 탐색하여 파일을 가장 작은 크기로 줄일 수 있는 무손실 특수 모드(`-m 6 -q 100`)가 있습니다. 속도가 한 자리수 정도 더 느릴 수 있으나, 정적인 에셋용으로는 충분히 사용할 가치가 있습니다.
+* 타 브라우저용 폴백 이미지로는 Guetzli/MozJPEG로 압축한 이미지 소스를 전달하시면 됩니다.
 
-<aside class="note"><b>Note:</b> For more practical guidance on how to optimize images, I heavily recommend [Web Performance in Action](https://www.manning.com/books/web-performance-in-action) by Jeremy Wagner. [High Performance Images](http://shop.oreilly.com/product/0636920039730.do) is also filled with excellent, nuanced advice on this topic.</aside>
+즐거운 압축 되세요!(Happy compressing!)
+
+<aside class="note"><b>알아두기:</b> 이미지 최적화 방법에 대한 조금 더 실용적인 가이드를 보고 싶다면, 제레미 와그너(Jeremy Wagner)의 책인 [실전 웹성능(Web Performance in Action)](https://www.manning.com/books/web-performance-in-action)을 강력 추천합니다. [고성능 이미지(High Performance Images)](http://shop.oreilly.com/product/0636920039730.do) 책 역시 동일 주제에 대해 살짝 다르기는 하나 역시 뛰어난 조언들로 채워져 있습니다.</aside>
 
 ## <a id="trivia" href="#trivia">트리비아</a>
 
-* [JPEG XT](https://jpeg.org/jpegxt/) defines extensions to the 1992 JPEG specification. For extensions to have pixel-perfect rendering on-top of old JPEG, the specification had to clarify the old 1992 spec and [libjpeg-turbo](https://libjpeg-turbo.org/) was chosen as its reference implementation (based on popularity). 
-* [PIK](https://github.com/google/pik) is a new image codec worth keeping an eye on. It’s compatible with JPEG, has a more efficient color-space and utilizes similar benefits found in Guetzli. It decodes at 2/3 the speed of JPEG and offers 54% more file savings than libjpeg does. It is both faster to decode and compress than Guetzli-ified JPEGs. A [study](https://encode.ru/threads/2814-Psychovisual-analysis-on-modern-lossy-image-codecs) on psychovisual similarity of modern image codes showed PIK was less than half the size of alternatives. Unfortunately, it’s still early days for the codec and encoding is unusably slow at this time (August, 2017).
-* [ImageMagick](https://www.imagemagick.org/script/index.php) is often recommended for image optimization. This write-up considers it a fine tool, but its output generally requires more optimization and other tools can offer better output. We recommend trying [libvips](https://github.com/jcupitt/libvips) instead, however it is lower-level and requires more technical skill to use. ImageMagick has also histortically had [noted](https://imagetragick.com/#moreinfo) security vulnerabilities you may want to be aware of.
-* Blink (the rendering engine used by Chrome) decodes images off the main thread. Moving the decode work to the compositor thread frees-up the main thread to work on other tasks. We call this deferred decoding. With deferred decoding, the decode work remains on the critical path for presenting a frame to the display, so it can still cause animation jank. The [`img.decode()`](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-decode) API should help with the jank problem.
+* [JPEG XT](https://jpeg.org/jpegxt/)는 1992년에 만들어진 JPEG 명세서의 확장판입니다. 예전 JPEG를 기반으로 확장판을 구현해 픽셀 렌더링을 완벽하게 하기 위해서는 구 1992년판 명세를 명확하게 재정의 했어야 했고, [libjpeg-turbo](https://libjpeg-turbo.org/)가 (그당시 인기도를 바탕으로) JPEG XT의 레퍼런스로 채택되었습니다.
+* [PIK](https://github.com/google/pik)는 눈여겨 볼만한 새로운 이미지 코덱입니다. JPEG과 호환이 되며 좀 더 효율적으로 색공간을 관리합니다. 그리고 Guetzli와 유사한 장점들을 지니고 있습니다. 디코딩 하는데 JPEG 속도의 2/3 만큼 걸리며, libjepg 보다 파일 용량을 54% 가량 더 절약할 수 있습니다. Guetzli화 된 JPEG보다 디코딩, 압축 속도가 모두 빠릅니다. 최신 이미지 코덱에 대한 심리지각 유사성에 관한 [연구](https://encode.ru/threads/2814-Psychovisual-analysis-on-modern-lossy-image-codecs)에 따르면, PIK가 다른 대조군들보다 크기가 절반 이상 작습니다. 불행하게도, 아직 이 코덱을 사용하기에는 시기상조이며 인코딩 속도가 지금은 비정상적이게 느립니다. (2017년 8월 기준)
+* [ImageMagick](https://www.imagemagick.org/script/index.php)은 이미지 최적화용도로 자주 추천되는 툴입니다. 괜찮은 도구라 생각하나, 결과물이 나오기까지 거쳐야 하는 최적화 과정이 더 길며, 다른 툴을 사용하면 이것보다 더 좋은 결과물을 받아 볼 수 있습니다. 이 툴 대신 [libvips](https://github.com/jcupitt/libvips)를 사용해 보시는 것을 추천합니다. 그러나 더 저수준의 툴이기 때문에 사용하시려면 기술적인 지식을 좀 더 필요로 합니다. ImageMagick은 또한 [보안상 취약점](https://imagetragick.com/#moreinfo)이 발견된 역사를 가지고 있는데, 여러분이 왠지 알고 싶어할 것 같아 적어 놓습니다.
+* 블링크(크롬에서 사용하는 렌더링 엔진)은 메인 스레드 밖에서 이미지를 디코딩합니다. 디코딩 관련 작업을 컴포지터(compositor) 스레드에서 하도록 옮기면 메인 스레드가 다른 일을 할 수 있는 여유가 생깁니다. 구글에서는 이를 지연된 디코딩(deffered decoding)이라고 부릅니다. 지연된 디코딩으로 인해, 화면 상에 프레임을 표시해야 하므로 크리티컬 패스 내에 디코딩 작업이 남아 있게 됩니다. 이 때문에 애니메이션이 버벅이는 현상(jank)이 발생할 수 있습니다. [`img.decode()`](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-decode) API를 사용하면 이 버벅임 문제를 해결하는 데 도움이 됩니다.
 
 <p class="license">The content of this book is licensed under the  Creative Commons [Attribution-NonCommercial-NoDerivs 2.0 Generic (CC BY-NC-ND 2.0)](https://creativecommons.org/licenses/by-nc-nd/2.0/) license, and code samples are licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). Copyright Google, 2017.</p>
 
