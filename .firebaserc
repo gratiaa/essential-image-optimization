@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "essential-image-optim"
+    "default": "essential-image-optim",
+    "eio": "essential-image-optimization"
   }
 }
