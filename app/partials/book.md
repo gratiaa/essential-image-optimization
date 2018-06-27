@@ -6,7 +6,7 @@
 
 대부분의 CDN(예: [Akamai](https://www.akamai.com/us/en/solutions/why-akamai/image-management.jsp))과 서드파티 솔루션(예: [Cloudinary](https://cloudinary.com), [imgix](https://imgix.com), [Fastly’s Image Optimizer](https://www.fastly.com/io/), [Instart Logic’s SmartVision](https://www.instartlogic.com/technology/machine-learning/smartvision), [ImageOptim API](https://imageoptim.com/api))에는 이미지 최적화 자동화 종합 솔루션이 포함되어 있습니다.
 
-여러분이 직접 이미지 최적화와 관련된 블로그 포스트를 읽고, 프로젝트 설정을 만지는 데 들이게 될 시간을 비용으로 따져보면 네트워크 서비스 월 사용료를 초과합니다. (Cloudinary에는 [무료](http://cloudinary.com/pricing) 서비스 티어도 있습니다.) 비용이나 지연 문제 때문에 최적화 작업을 위탁 하고 싶지 않다면, 오픈 소스 프로젝트를 선택해 보는 것도 괜찮습니다. [Imageflow](https://github.com/imazen/imageflow)나 [Thumbor](https://github.com/thumbor/thumbor)와 같은 프로젝트 소스를 사용하면 이미지 호스팅을 직접 할 수 있습니다.
+여러분이 직접 이미지 최적화와 관련된 블로그 포스트를 읽고, 프로젝트 설정을 만지는 데 들이게 될 시간을 비용으로 따져보면 네트워크 서비스 월 사용료를 초과합니다. (Cloudinary에는 [무료](http://cloudinary.com/pricing) 서비스 티어도 있습니다.) 비용이나 지연(latency) 문제 때문에 최적화 작업을 아웃소싱 하고 싶지 않다면, 오픈 소스 프로젝트를 선택해 보는 것도 괜찮습니다. [Imageflow](https://github.com/imazen/imageflow)나 [Thumbor](https://github.com/thumbor/thumbor)와 같은 프로젝트 소스를 사용하면 이미지 호스팅을 직접 할 수 있습니다.
 
 **우리 모두 이미지를 효율적인 방법으로 압축해야 합니다.**
 
@@ -78,7 +78,7 @@
 
 ### <a id="introduction" href="#introduction">서론</a>
 
-**웹 리소스 용량이 불어나는 데는 여전히 이미지가 일등으로 이바지하고 있습니다.**
+**웹 리소스 용량이 불어나는 데는 여전히 이미지가 일등 공신입니다.**
 
 이미지는 대용량으로 올라가는 경우가 많아서 인터넷 대역폭에서 막대한 지분율을 차지합니다. [HTTP Archive](http://httparchive.org/)에 따르면, 웹 페이지를 가져올 때 전송받은 데이터 중 60%는 JPEG, PNG, GIF 이미지가 차지합니다. 2017년 7월 기준, 한 사이트에서 평균 3.0MB의 콘텐츠를 불러올 때, 이미지가 이 중에서 [1.7MB](http://httparchive.org/interesting.php#bytesperpage)를 차지합니다.
 
@@ -210,7 +210,7 @@ Tammy Everts의 글에 따르면, 페이지에 이미지를 추가하거나 기�
 </noscript>
 </picture>
 
-<figcaption>WebPageTest 보고서의 ‘Compress Images’ 섹션을 보면 보면 더 효율적인 압축을 해 볼 수 있는 이미지 목록이 있고, 압축 후에 얼마만큼 파일 사이즈를 줄일 수 있는지에 대한 추정치가 제시되어 있습니다.</figcaption>
+<figcaption>WebPageTest 보고서의 ‘Compress Images’ 섹션에는 더 효율적으로 압축을 해 볼 수 있는 이미지 목록이 첨부되어 있고, 압축 후에 얼마만큼 파일 사이즈를 줄일 수 있는지에 대한 추정치가 제시되어 있습니다.</figcaption>
 </figure>
 
 <figure>
@@ -631,7 +631,7 @@ gulp.task('images', function () {
 <figcaption>[Understanding JPEG](http://compress-or-die.com/Understanding-JPG/) 글에 따르면, 텍스트가 포함된 이미지에 서브샘플링 적용 시 4:4:4 (1x1) 옵션으로만 선택하기를 권장합니다.</figcaption>
 </figure>
 
-트리비아: 채도 서브샘플링의 정확한 방법은 JPEG 명세서에 정의가 되지 않았기 때문에 디코더마다 구현 방식이 다릅니다. MozJPEG과 libjepg-turbo는 둘 다 축적(scaling) 방식을 채택하였습니다. 예전 버전 libjpeg에서는 다른 방식을 사용했었는데, 색상에 고리 모양 아티팩트(ringing artifact)를 추가하는 방식이었습니다.
+트리비아: 채도 서브샘플링의 정확한 방법은 JPEG 명세서에 정의가 되지 않았기 때문에 디코더마다 구현 방식이 다릅니다. MozJPEG과 libjpeg-turbo는 둘 다 축적(scaling) 방식을 채택하였습니다. 예전 버전 libjpeg에서는 다른 방식을 사용했었는데, 색상에 고리 모양 아티팩트(ringing artifact)를 추가하는 방식이었습니다.
 
 <aside class="note"><b>알아두기:</b> 포토샵에서는 '웹용으로 저장(Save for web)' 기능 사용 시 채도 서브샘플링을 자동으로 설정합니다. 이미지 품질이 51-100 사이로 설정되었다면 서브샘플링은 전혀 적용되지 않은 상태입니다(`4:4:4`). 이보다 품질이 낮다면 `4:2:0` 서브샘플링이 사용됩니다. 품질을 51에서 50으로 낮출 때 파일 크기가 상당히 줄어드는 것을 볼 수 있는데, 서브샘플링이 적용된 것이 그 원인 중 하나입니다.</aside>
 
@@ -669,7 +669,7 @@ gulp.task('images', function () {
 </figure>
 
 *   **[JPEG 2000](https://en.wikipedia.org/wiki/JPEG_2000) (2000)** – 변환 기법 기반을 이산 코사인에서 웨이블릿으로 바꿔서 기존 JPEG을 개선한 포맷입니다. **브라우저 지원: 사파리 데스크톱 + iOS**
-*   **[JPEG XR](https://en.wikipedia.org/wiki/JPEG_XR) (2009)** – [HDR](http://wikivisually.com/wiki/High_dynamic_range_imaging)과 광색역(wide [gamut](http://wikivisually.com/wiki/Gamut)) 색 공간을 지원하는 포맷으로, JPEG과 JPEG 2000의 대안으로 등장했습니다. JPEG보다 파일 크기는 작으나 인코딩/디코딩 속도가 살짝 느립니다. **브라우저 지원: IE Edge**
+*   **[JPEG XR](https://en.wikipedia.org/wiki/JPEG_XR) (2009)** – [HDR](http://wikivisually.com/wiki/High_dynamic_range_imaging)과 넓은 색 공간(wide [gamut](http://wikivisually.com/wiki/Gamut))을 지원하는 포맷으로, JPEG과 JPEG 2000의 대안으로 등장했습니다. JPEG보다 파일 크기는 작으나 인코딩/디코딩 속도가 살짝 느립니다. **브라우저 지원: IE Edge**
 *   **[WebP](https://en.wikipedia.org/wiki/WebP) (2010)** – 구글이 만든 포맷으로, 블록예측(block-prediction)을 기반으로 합니다. 무손실과 손실 압축 둘 다 지원합니다. JPEG의 장점인 높은 이미지 크기 절약도와 PNG 파일의 용량이 큼에도 불구하고 사용했던 이유 중 하나인 투명도 지원을 모두 합니다. 채도 서브샘플링과 점진적 로딩 설정은 할 수 없습니다. JPEG 보다 디코딩 시간이 더 걸립니다. **브라우저 지원: 크롬, 오페라. 사파리와 파이어폭스에서는 실험 기능.**
 *   **[FLIF](https://en.wikipedia.org/wiki/Free_Lossless_Image_Format) (2015)** – 압축률 면에서 PNG, 무손실 WebP, 무손실 BPG, 무손실 JPEG 2000을 뛰어넘는 성능을 자랑하는 무손실 이미지 포맷. **브라우저 지원: 없음. *[브라우저 내에서 사용할 수 있는 JS 디코더](https://github.com/UprootLabs/poly-flif)가 있습니다.***
 *   **HEIF and BPG** - 압축 면에서 보면 두 포맷이 같지만, 외부 포장재가 다릅니다.
@@ -1709,7 +1709,7 @@ trellis 양자화(quantization) 덕분에 MozJPEG을 사용하면 압축을 다�
 </noscript>
 </picture>
 <figcaption>
-브라우저가 이미지를 가져오면, 원본 파일 형식(예: JPEG)을 메모리상의 비트맵으로 디코딩해야 합니다. 이미지 크기를 변환(예: 컨테이너 크기에 맞게 너빗값을 퍼센트로 맞추기)하는 작업도 자주 하게 됩니다. 이미지 디코딩 및 크기 변환 작업은 비용 작업이 높을뿐더러 이미지가 화면에 표시될 때까지 걸리는 시간도 지연시킵니다.</figcaption>
+브라우저가 이미지를 가져오면, 원본 파일 형식(예: JPEG)을 메모리상의 비트맵으로 디코딩해야 합니다. 이미지 크기를 변환(예: 컨테이너 크기에 맞게 너빗값을 퍼센트로 맞추기)하는 작업도 자주 하게 됩니다. 이미지 디코딩 및 크기 변환 작업은 비용 작업이 높을뿐더러 이미지가 화면에 표시될 때까지 걸리는 시간도 늘어납니다.</figcaption>
 </figure>
 
 이상적인 상황은 크기 변환을 전혀 할 필요 없이 브라우저에 렌더링할 수 있는 이미지를 보내는 경우입니다. 그러므로 여러분이 목표로 하는 스크린 크기와 해상도에 맞는 가장 작은 이미지를 서버에서 전송하도록 하세요. [`srcset`과 `sizes`](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)의 장점을 이용해서 말입니다. `srcset`에 대해서는 잠시 후에 다루도록 하겠습니다.
@@ -1954,12 +1954,12 @@ trellis 양자화(quantization) 덕분에 MozJPEG을 사용하면 압축을 다�
   <img src="https://res.cloudinary.com/ddxwdqwkr/image/upload/c_scale,w_500/v1504564915/srgb-rgb_ntuhi4.jpg"/>
 </noscript>
 </picture>
-<figcaption>[Yardstick](https://yardstick.pictures/tags/img%3Adci-p3)에서 가져온 이미지를 바탕으로 sRGB, Adobe RGB, ProPhoto RGB 비교. sRGB로는 우리 눈으로 볼 수 없는 색을 표현하기가 엄청나게 어렵습니다. sRGB로 된 일반 사진과 광색역으로 표현된 사진을 비교해보자면 하나만 빼고 모든 것이 동일한데, 그것은 바로 채도가 극단적으로 높게 표현되는 '먹음직스러운' 색입니다.</figcaption>
+<figcaption>[Yardstick](https://yardstick.pictures/tags/img%3Adci-p3)에서 가져온 이미지를 바탕으로 sRGB, Adobe RGB, ProPhoto RGB 비교. sRGB로는 우리 눈으로 볼 수 없는 색을 표현하기가 엄청나게 어렵습니다. sRGB로 된 일반 사진과 넓은 색 영역으로 표현된 사진을 비교해보자면 하나만 빼고 모든 것이 동일한데, 그것은 바로 채도가 극단적으로 높게 표현되는 '먹음직스러운' 색입니다.</figcaption>
 </figure>
 
 색 공간 사이의 다른점(sRGB, Adobe RGB, ProPhoto RGB처럼)은 각각의 색 영역(그림자까지 추가하여 만들어낼 수 있는 색 범위), 발광도(illuminant)와 [감마](http://blog.johnnovak.net/2016/09/21/what-every-coder-should-know-about-gamma/) 곡선입니다. sRGB는 Adobe RGB보다 20%정도 영역이 작고, ProPhoto RGB는 Adobe RG 이보다 50%가량 넓습니다. 위 이미지는 [Clipping Path](http://clippingpathzone.com/blog/essential-photoshop-color-settings-for-photographers)에서 가져왔습니다.
 
-[광색영역(Wide-gamut)](http://www.astramael.com/)은 sRGB보다 넓은 색 영역을 지닌 공간을 일컬을 때 사용하는 단어입니다. 광색영역을 지닌 모니터가 점점 많아지는 추세입니다. 다르게 말하자면 아직도 많은 디지털 디스플레이에서는 sRGB보다 훨씬 더 나은 컬러 프로필을 화면에 표시할 수 없는 상태라는 뜻입니다. 타겟 유저가 비싼 광색영역 화면을 사용하지 않는 이상, 포토샵에서 '웹용으로 저장'할 때, 'sRGB로 변환(Convert to sRGB)' 옵션 선택을 한번 고려해 보세요.
+[넓은 색영역(Wide-gamut)](http://www.astramael.com/)은 sRGB보다 넓은 색 영역을 지닌 공간을 일컬을 때 사용하는 단어입니다. 광색영역을 지닌 모니터가 점점 많아지는 추세입니다. 다르게 말하자면 아직도 많은 디지털 디스플레이에서는 sRGB보다 훨씬 더 나은 컬러 프로필을 화면에 표시할 수 없는 상태라는 뜻입니다. 타겟 유저가 비싼 광색영역 화면을 사용하지 않는 이상, 포토샵에서 '웹용으로 저장'할 때, 'sRGB로 변환(Convert to sRGB)' 옵션 선택을 한번 고려해 보세요.
 
 <aside class="key-point"><b>알아두기:</b> 원본 사진을 편집할 때 sRGB를 주요 색공간으로 사용하는 것은 피하세요. sRGB는 대부분의 카메라가 지원할 수 있는 색공간보다 영역이 좁고 클리핑 현상이 일어날 수 있습니다. 대신에 (ProPhoto RGB 같은) 더 넓은 색공간에서 작업을 하고 웹용으로 저장할 때 sRGB로 옮기세요.</aside>
 
@@ -1995,7 +1995,7 @@ trellis 양자화(quantization) 덕분에 MozJPEG을 사용하면 압축을 다�
 
 #### 색 프로파일과 웹 브라우저
 
-크롬 초기 버전에서는 색 관리에 대한 지원이 그다지 좋은 편은 아니었으나, 2017년에 [색 보정 렌더링(Color Correct Rendering)](https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/ptuKdRQwPAo) 기능이 개선되었습니다. sRGB가 아닌 화면(신규 맥북 프로)은 sRGB 색공간을 디스플레이 프로파일에 맞추어 변환시킵니다. 따라서 여러 시스템과 다양한 브라우저를 통해 이미지를 보면 모두 색상이 비슷하게 보일 것입니다. 사파리, 엣지, 파이어폭스 브라우저도 ICC 프로파일을 사용할 수 있으므로, 색 프로파일이 다른 이미지가 있다 해도 브라우저가 알아서 색공간을 조정하므로 화면의 광색역 지원 여부와는 상관없이 동일하게 색이 표현됩니다.
+크롬 초기 버전에서는 색 관리에 대한 지원이 그다지 좋은 편은 아니었으나, 2017년에 [색 보정 렌더링(Color Correct Rendering)](https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/ptuKdRQwPAo) 기능이 개선되었습니다. sRGB가 아닌 화면(신규 맥북 프로)은 sRGB 색공간을 디스플레이 프로파일에 맞추어 변환시킵니다. 따라서 여러 시스템과 다양한 브라우저를 통해 이미지를 보면 모두 색상이 비슷하게 보일 것입니다. 사파리, 엣지, 파이어폭스 브라우저도 ICC 프로파일을 사용할 수 있으므로, 색 프로파일이 다른 이미지가 있다 해도 브라우저가 알아서 색공간을 조정하므로 화면의 넓은 범위 색영역 지원 여부와는 상관없이 동일하게 색이 표현됩니다.
 
 <aside class="key-point"><b>알아두기:</b> 현재 통용되는 여러 웹 색상 표현 방법에 대해 더 알아보고 싶다면, Sarah Drasner가 쓴 [nerd’s guide to color on the web](https://css-tricks.com/nerds-guide-color-web/)를 참고하세요.</aside>
 
@@ -2033,7 +2033,7 @@ HTTP/1.x에서는 HTTP 요청수를 줄이려고 스프라이트를 사용합니
 
 ## <a id="lazy-load-non-critical-images" href="#lazy-load-non-critical-images">중요하지 않은 이미지는 레이지 로딩</a>
 
-레이지 로딩 기법은 특정한 이미지가 있을 때, 사용자가 그 이미지를 봐야 할 필요성을 느끼기 전까지 브라우저에서 로딩을 지연시키는 웹 성능 패턴입니다. 사용 예시로는 스크롤을 할 때 이미지가 필요할 때마다 비동기적으로 로딩되는 경우를 들어볼 수 있습니다. 레이지 로딩을 통해 이미지 압축 전략으로 이미 줄여 놓은 데이터 사용량을 조금 더 줄여볼 수 있습니다.
+레이지 로딩 기법은 특정한 이미지가 있을 때, 사용자가 이미지를 볼 필요성을 느끼기 전까지 브라우저에서 로딩 시점을 늦추는 웹 성능 패턴입니다. 사용 예시로는 스크롤을 할 때 이미지가 필요할 때마다 비동기적으로 로딩되는 경우를 들어볼 수 있습니다. 레이지 로딩을 통해 이미지 압축 전략으로 이미 줄여 놓은 데이터 사용량을 조금 더 줄여볼 수 있습니다.
 
 <figure>
 <picture>
@@ -2366,7 +2366,7 @@ Cloudinary를 사용중인 고객수는 [16만명](http://cloudinary.com/custome
 
 CDN을 사용하려면 돈이 필요합니다. 이미지가 많이 올라가면서 트래픽이 많은 사이트는 한달 CDN 사용료만 해도 수백달러가 넘어가는 비용이 들어갈 겁니다. CDN 서비스를 최대한 잘 사용하려면 미리 관련 지식과 프로그래밍 스킬을 일정 수준 이상으로 닦아놓아야 합니다. 너무 오버스러운 기능만 사용하지 않으면 CDN을 사용하면서 곤경에 처할 일은 아마 전혀 없을 겁니다.
 
-그러나 만약 이미지 처리 도구나 API를 사용하면서 어려움을 겪으신다면, 지금 내가 러닝 커브를 겪고 있구나 생각하시면 됩니다. CDN 서버를 제대로 사용하려면 여러분 로컬 링크 URL을 일부 바꿔야 할 수도 있습니다. 자산 관리 제대로 해두세요 :)
+그러나 만약 이미지 처리 도구나 API를 사용하면서 어려움을 겪으신다면, 지금 내가 러닝 커브를 겪고 있구나 생각하시면 됩니다. CDN 서버를 제대로 사용하려면 여러분 로컬 링크 URL을 일부 바꿔야 할 수도 있습니다. 이미지 자산(asset) 관리 제대로 해두세요 :)
 
 **결론**
 
@@ -2537,7 +2537,7 @@ Calibre 역시 비슷한 기능을 제공하는데, 목표 디바이스 별 예�
 
 * JPEG 품질 90 이상: Guetzli + MozJPEG의 jpegtran 조합을 추천합니다.
     * 웹에서는 `q=90`은 쓸데없이 높은 품질입니다. `q=80`으로도 충분하며, 레티나 디스플레이에서조차 `q=50`를 사용할 수 있습니다. Guetzli에서는 그렇게 낮게 품질을 설정할 수 없으므로, 웹용으로 MozJPEG을 사용하시면 됩니다.
-    * Kornel Lesi&#x144;ski는 최근 광색역 디스플레이에서도 크롬 디스플레이의 자연색을 잘 보이게 하기 위해 소량의 sRGB 프로파일을 MozJPEG의 cjpeg 커맨드에 넣었습니다.
+    * Kornel Lesi&#x144;ski는 최근 넓은 색 영역 디스플레이에서도 크롬 디스플레이의 자연색을 잘 보이게 하기 위해 소량의 sRGB 프로파일을 MozJPEG의 cjpeg 커맨드에 넣었습니다.
 * PNG pngquant + advpng 조합은 압축률이 꽤 좋습니다.
 
 브라우저에 따라 조건적으로 이미지를 전달할 수 **있다면** 다음을 추천합니다. (`<picture>`, [Accept header](https://www.igvita.com/2013/05/01/deploying-webp-via-accept-content-negotiation/) 혹은 [Picturefill](https://scottjehl.github.io/picturefill/)을 사용하는 경우)
@@ -2555,9 +2555,9 @@ Calibre 역시 비슷한 기능을 제공하는데, 목표 디바이스 별 예�
 ## <a id="trivia" href="#trivia">트리비아</a>
 
 * [JPEG XT](https://jpeg.org/jpegxt/)는 1992년에 만들어진 JPEG 명세서의 확장판입니다. 예전 JPEG를 기반으로 확장판을 구현해 픽셀 렌더링을 완벽하게 하기 위해서는 구 1992년판 명세를 명확하게 재정의 했어야 했고, [libjpeg-turbo](https://libjpeg-turbo.org/)가 (그당시 인기도를 바탕으로) JPEG XT의 레퍼런스로 채택되었습니다.
-* [PIK](https://github.com/google/pik)는 눈여겨 볼만한 새로운 이미지 코덱입니다. JPEG과 호환이 되며 좀 더 효율적으로 색공간을 관리합니다. 그리고 Guetzli와 유사한 장점들을 지니고 있습니다. 디코딩 하는데 JPEG 속도의 2/3 만큼 걸리며, libjepg 보다 파일 용량을 54% 가량 더 절약할 수 있습니다. Guetzli화 된 JPEG보다 디코딩, 압축 속도가 모두 빠릅니다. 최신 이미지 코덱에 대한 심리지각 유사성에 관한 [연구](https://encode.ru/threads/2814-Psychovisual-analysis-on-modern-lossy-image-codecs)에 따르면, PIK가 다른 대조군들보다 크기가 절반 이상 작습니다. 불행하게도, 아직 이 코덱을 사용하기에는 시기상조이며 인코딩 속도가 지금은 비정상적이게 느립니다. (2017년 8월 기준)
+* [PIK](https://github.com/google/pik)는 눈여겨 볼만한 새로운 이미지 코덱입니다. JPEG과 호환이 되며 좀 더 효율적으로 색공간을 관리합니다. 그리고 Guetzli와 유사한 장점들을 지니고 있습니다. 디코딩 하는데 JPEG 속도의 2/3 만큼 걸리며, libjpeg 보다 파일 용량을 54% 가량 더 절약할 수 있습니다. Guetzli화 된 JPEG보다 디코딩, 압축 속도가 모두 빠릅니다. 최신 이미지 코덱에 대한 심리지각 유사성에 관한 [연구](https://encode.ru/threads/2814-Psychovisual-analysis-on-modern-lossy-image-codecs)에 따르면, PIK가 다른 대조군들보다 크기가 절반 이상 작습니다. 불행하게도, 아직 이 코덱을 사용하기에는 시기상조이며 인코딩 속도가 지금은 비정상적이게 느립니다. (2017년 8월 기준)
 * [ImageMagick](https://www.imagemagick.org/script/index.php)은 이미지 최적화용도로 자주 추천되는 툴입니다. 괜찮은 도구라 생각하나, 결과물이 나오기까지 거쳐야 하는 최적화 과정이 더 길며, 다른 툴을 사용하면 이것보다 더 좋은 결과물을 받아 볼 수 있습니다. 이 툴 대신 [libvips](https://github.com/jcupitt/libvips)를 사용해 보시는 것을 추천합니다. 그러나 더 저수준의 툴이기 때문에 사용하시려면 기술적인 지식을 좀 더 필요로 합니다. ImageMagick은 또한 [보안상 취약점](https://imagetragick.com/#moreinfo)이 발견된 역사를 가지고 있는데, 여러분이 왠지 알고 싶어할 것 같아 적어 놓습니다.
-* 블링크(크롬에서 사용하는 렌더링 엔진)은 메인 스레드 밖에서 이미지를 디코딩합니다. 디코딩 관련 작업을 컴포지터(compositor) 스레드에서 하도록 옮기면 메인 스레드가 다른 일을 할 수 있는 여유가 생깁니다. 구글에서는 이를 지연된 디코딩(deffered decoding)이라고 부릅니다. 지연된 디코딩으로 인해, 화면 상에 프레임을 표시해야 하므로 크리티컬 패스 내에 디코딩 작업이 남아 있게 됩니다. 이 때문에 애니메이션이 버벅이는 현상(jank)이 발생할 수 있습니다. [`img.decode()`](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-decode) API를 사용하면 이 버벅임 문제를 해결하는 데 도움이 됩니다.
+* 블링크(크롬에서 사용하는 렌더링 엔진)은 메인 스레드 밖에서 이미지를 디코딩합니다. 디코딩 관련 작업을 컴포지터(compositor) 스레드에서 하도록 옮기면 메인 스레드가 다른 일을 할 수 있는 여유가 생깁니다. 구글에서는 이를 연기시킨 디코딩(deffered decoding)이라고 부릅니다. 디코딩 작업이 뒤로 미뤄졌기 때문에, 프레임을 화면에 표시해야 하므로 크리티컬 패스 내에 디코딩 작업이 남아 있게 됩니다. 이 때문에 애니메이션이 버벅이는 현상(jank)이 발생할 수 있습니다. [`img.decode()`](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-decode) API를 사용하면 이 버벅임 문제를 해결하는 데 도움이 됩니다.
 
 <p class="license">The content of this book is licensed under the  Creative Commons [Attribution-NonCommercial-NoDerivs 2.0 Generic (CC BY-NC-ND 2.0)](https://creativecommons.org/licenses/by-nc-nd/2.0/) license, and code samples are licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). Copyright Google, 2017.</p>
 
